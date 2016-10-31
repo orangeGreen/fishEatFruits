@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>大鱼喂小鱼</title>
+</head>
+<body>
+    <div class="main_container">
+        <canvas id="canvas1"></canvas>
+        <canvas id="canvas2"></canvas>
+    </div>
+</body>
+<style>
+.main_container{
+    width:800px;
+    height:600px;
+    margin:100px auto;
+    position:relative;
+}
+#canvas1{
+    position:absolute;
+    top:0;
+    z-index:0;
+}
+#canvas2{
+    position:absolute;
+    top:0;
+    z-index:1;
+}
+</style>
+<script src="js/commonFunction.js"></script>
+<script src="js/main.js"></script>
+<script src="js/ane.js"></script>
+<script src="js/fruit.js"></script>
+<script src="js/mom.js"></script>
+<script src="js/mouseEvent.js"></script>
+</html>

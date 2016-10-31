@@ -1,4 +1,7 @@
 
+//主文件
+
+
 var can1 = document.getElementById('canvas1')
 var can2 = document.getElementById('canvas2')
 
@@ -28,7 +31,6 @@ function init(){
 
     backImage.onload = function(){
     
-       
         //海葵初始化
         ane = new Ane();
         ane.init();

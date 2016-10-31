@@ -49,8 +49,9 @@ Mom.prototype.move =function(x,y){
    var dy = y-this.y;
 
    var beta = Math.atan2(dy,dx) + Math.PI;  //加一个pi是因为atan2返回范围是-pi到pi,-PI 到PI
+  
    this.angle = lerpAngle(beta,this.angle,0.6)
-
+   
    this.checkBoom();
 
 }

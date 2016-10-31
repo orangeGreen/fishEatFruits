@@ -2,7 +2,7 @@
 //通用的js函数
 
 
-//用浏览器提供的动画接口
+//用浏览器提供的动画帧接口
 window.requestAnimFrame = (function() {
 	return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
 		function( /* function FrameRequestCallback */ callback, /* DOMElement Element */ element) {

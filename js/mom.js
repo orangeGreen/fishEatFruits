@@ -8,7 +8,7 @@ var Mom = function(){
     this.tail = new Image();   //尾巴
     this.x = 0;
     this.y = 0;
-    this.angle = 0; //大于旋转角度
+    this.angle = 0; //大鱼需要旋转角度
     this.eatLen = 15; //吃果实的距离。。
     this.all = 0; //总共吃了多少个
 }
@@ -42,8 +42,8 @@ Mom.prototype.draw = function(){
 Mom.prototype.move =function(x,y){
    
    //用趋近于，可以让鱼不立即显示在鼠标下面，而是在旁边
-   this.x = lerpAim(x,this.x,0.9);
-   this.y = lerpAim(y,this.y,0.9);
+   this.x = lerpAim(x,this.x,0.95);
+   this.y = lerpAim(y,this.y,0.95);
    
    var dx = x-this.x;
    var dy = y-this.y;

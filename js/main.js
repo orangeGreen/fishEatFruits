@@ -17,6 +17,7 @@ var backImage;
 var ane;
 var fruit;
 var mom;
+var child;
 var mouse;
 function init(){
     can1.width = 800;
@@ -40,6 +41,9 @@ function init(){
         //大鱼初始化
         mom = new Mom();
         mom.init();
+        //小鱼初始化
+        child = new Child();
+        child.init()
         //鼠标事件初始化
         mouse = new Mouse();
         mouse.init();
@@ -56,6 +60,7 @@ function gameLoop(){
 
     fruit.born();
     mom.draw();
+    child.draw();
     requestAnimFrame(gameLoop)
 }
 

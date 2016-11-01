@@ -3,9 +3,8 @@
 //孩子
 
 var Child = function(){
-    this.eye = new Image();  //眼睛
+
     this.body = new Image();  //身体
-    this.tail = new Image();   //尾巴
 
     this.x = 0;
     this.y = 0;
@@ -26,9 +25,9 @@ var Child = function(){
 //孩子初始化
 
 Child.prototype.init = function(){
-    this.eye.src = "image/babyEye0.png"
+    
     this.body.src = "image/babyFade0.png"
-    this.tail.src = "image/babyTail0.png"
+    
 
     //坐标跟随妈妈
     this.x = can2.width*0.5;

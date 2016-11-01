@@ -112,12 +112,12 @@ Mom.prototype.move =function(x,y){
 
 Mom.prototype.checkBoom = function(){
     for(var i = 0; i < fruit.num; i++){
-        if (fruit.fruits[i].alive && Math.abs(fruit.fruits[i].x-this.x) < this.eatLen && Math.abs(fruit.fruits[i].y-this.y) < this.eatLen){
-            //
+        //如果果实和鱼妈妈的距离小于吃的距离，就吃了它
+        if (fruit.fruits[i].alive && towPointDistance(fruit.fruits[i].x,fruit.fruits[i].y,this.x,this.y) < this.eatLen){
             this.all++;
             console.log("Eat a ",fruit.fruits[i].color," fruit,All = ",this.all)
-            
-            fruit.fruits[i].alive = false;
+        
+            fruit.dead(i);
         }
     }
 }

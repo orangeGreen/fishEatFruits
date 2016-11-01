@@ -110,7 +110,7 @@ Fruit.prototype.drawFruit = function(i){
     }
     
     if (this.fruits[i].y <= 0){  //是否移除画面
-        this.fruits[i].alive = false;
+        this.dead(i)
     }
 }
 
@@ -123,4 +123,9 @@ Fruit.prototype.getAliveNum = function(){
         }
     }
     return num;
+}
+//果实死了
+
+Fruit.prototype.dead = function(i){
+     this.fruits[i].alive = false;
 }

@@ -55,12 +55,9 @@ Mom.prototype.draw = function(){
     this.tailTimer += deltaTime; //加上每一帧的间隔时间
     
     if (this.tailTimer > this.tailInterval){
-         
-        this.tailCount ++;
-        if (this.tailCount > this.tailImage.length-1){  //如过计数器大于尾巴图片数，归零
-            this.tailCount = this.tailCount%(this.tailImage.length-1);
-        }
-        this.tailTimer = this.tailTimer % this.tailInterval; //然后把计时器归位
+
+        this.tailCount  = (this.tailCount+1)%(this.tailImage.length-1);//如过计数器大于尾巴图片数，归零
+        this.tailTimer %= this.tailInterval; //然后把计时器归位
     }
     //眼睛计时器
     this.eyeTimer += deltaTime;
@@ -70,10 +67,8 @@ Mom.prototype.draw = function(){
         if (this.eyeCount == 1){  //如果是闭上的，那么就把眨眼睛关上
             this.eyeIsNictation = false;
         }
-        this.eyeCount ++;
-        if (this.eyeCount > this.eyeImage.length - 1){
-            this.eyeCount = this.eyeCount % (this.eyeImage.length - 1);
-        }
+        this.eyeCount = (this.eyeCount+1)%(this.eyeImage.length);
+    
         this.eyeTimer %= this.eyeInterval;
     }else if(!this.eyeIsNictation && (this.eyeTimer > Math.random()*1000+2000)){
         this.eyeIsNictation = true;
@@ -104,20 +99,29 @@ Mom.prototype.move =function(x,y){
   
    this.angle = lerpAngle(beta,this.angle,0.6)
    
-   this.checkBoom();
-
+   //只有移动大鱼，才进行吃果实和喂小鱼动作
+   this.eatFruits();
+   this.feedBaby();
 }
 
-//检测大鱼是否碰到了果实
+//大鱼吃果实
 
-Mom.prototype.checkBoom = function(){
+Mom.prototype.eatFruits = function(){
     for(var i = 0; i < fruit.num; i++){
         //如果果实和鱼妈妈的距离小于吃的距离，就吃了它
         if (fruit.fruits[i].alive && towPointDistance(fruit.fruits[i].x,fruit.fruits[i].y,this.x,this.y) < this.eatLen){
             this.all++;
             console.log("Eat a ",fruit.fruits[i].color," fruit,All = ",this.all)
-        
             fruit.dead(i);
         }
+    }
+}
+
+//大鱼喂小鱼
+
+Mom.prototype.feedBaby = function(){
+    //如果大鱼和小鱼距离小于xx，则喂鱼
+    if (towPointDistance(this.x,this.y,child.x,child.y) < 20){
+        child.bodyCount = 0;
     }
 }

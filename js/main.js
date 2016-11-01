@@ -21,6 +21,7 @@ var fruit;
 var mom;
 var child;
 var mouse;
+var data;
 function init(){
     can1.width = 800;
     can1.height = 600;
@@ -33,6 +34,9 @@ function init(){
     backImage.src = "image/background.jpg";
 
     backImage.onload = function(){
+        //数据初始化
+        data = new Data();
+        data.reset();
         
         //海葵初始化
         ane = new Ane();
@@ -58,7 +62,10 @@ function init(){
 
 //游戏循环
 function gameLoop(){
-    
+    //同意清空一下
+    ctx2.clearRect(0,0,can2.width,can2.height);
+
+    data.draw();
     drawBackground();
     ane.draw();
 

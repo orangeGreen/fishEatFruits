@@ -10,7 +10,6 @@ var Mom = function(){
     this.y = 0;
     this.angle = 0; //大鱼需要旋转角度
     this.eatLen = 15; //吃果实的距离。。
-    this.all = 0; //总共吃了多少个
 
     this.tailTimer = 0; //尾巴摆动计时器
     this.tailCount = 0;  //尾巴计数器
@@ -70,8 +69,6 @@ Mom.prototype.draw = function(){
         }
         this.eyeTimer = 0;  //归零
     }
-
-    ctx2.clearRect(0,0,can2.width,can2.height);
     ctx2.translate(this.x,this.y);  //把画画原点移动到大鱼要画的位置
     ctx2.rotate(this.angle)
     ctx2.drawImage(this.body,-this.body.width*0.5,-this.body.height*0.5);
@@ -106,9 +103,19 @@ Mom.prototype.eatFruits = function(){
     for(var i = 0; i < fruit.num; i++){
         //如果果实和鱼妈妈的距离小于吃的距离，就吃了它
         if (fruit.fruits[i].alive && towPointDistance(fruit.fruits[i].x,fruit.fruits[i].y,this.x,this.y) < this.eatLen){
-            this.all++;
-            console.log("Eat a ",fruit.fruits[i].color," fruit,All = ",this.all)
+            data.fruitsNum++; //数据记录
+            //分数记录
+            if (data.doubleScore == 1) {
+                data.score += 20
+                data.doubleScore = 0;
+            }else{
+                data.score += 10
+            } 
+            if (fruit.fruits[i].color == "blue"){  //如果迟到蓝色果实，分值也将加倍
+                data.doubleScore = 1;
+            }
             fruit.dead(i);
+
         }
     }
 }

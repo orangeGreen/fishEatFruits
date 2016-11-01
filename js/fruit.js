@@ -24,6 +24,7 @@ Fruit.prototype.init = function(){
             alive : false, //果实激活状态
             x : 0, //果实x坐标
             y : 0,  //果实y坐标
+            aneI:0,//诞生时所在海葵的下标
             growUp : 0, //成长状态
             growSpeed : Math.random()+this.growSpeed,  //果实成长速度
             moveSpeed : Math.random()+this.moveSpeed, //果实移动速度
@@ -42,12 +43,13 @@ Fruit.prototype.born = function(){
         var i = this.getDiedNum();
         //找一个海葵的坐标来诞生
         var aneI = parseInt(Math.random()*ane.num);
-         var x = ane.x[aneI];
-        var y = can1.height-ane.len[aneI];
+        var x = ane.topX[aneI];
+        var y = ane.topY[aneI];
         this.fruits[i].alive = true;
         this.fruits[i].x = x;
         this.fruits[i].y = y;
         this.fruits[i].growUp = 0;
+        this.fruits[i].aneI = aneI;
     }
 
     this.draw();
@@ -91,9 +93,14 @@ Fruit.prototype.draw = function(){
 }
 Fruit.prototype.drawFruit = function(i){
     if (this.fruits[i].growUp < this.growMax){  //未长大
+        //使诞生中的果实保持和运动的海葵顶部一样，
+        this.fruits[i].x = ane.topX[this.fruits[i].aneI];
+        this.fruits[i].y = ane.topY[this.fruits[i].aneI];
+
         this.fruits[i].growUp+=this.growSpeed;
         ctx1.drawImage(this.orangeImage,this.fruits[i].x-this.fruits[i].growUp/2,this.fruits[i].y,this.fruits[i].growUp,this.fruits[i].growUp);
     }else{  //长大了往上移动
+        //this.fruits[i].x = ane.topX[i];
         if (this.fruits[i].color == "orange"){
             var pic = this.orangeImage;
         }else{

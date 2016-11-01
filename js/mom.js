@@ -31,8 +31,8 @@ Mom.prototype.draw = function(){
     ctx2.clearRect(0,0,can2.width,can2.height);
     ctx2.translate(this.x,this.y);  //把画画原点移动到大鱼要画的位置
     ctx2.rotate(this.angle)
-    ctx2.drawImage(this.eye,-this.eye.width*0.5,-this.eye.height*0.5);
     ctx2.drawImage(this.body,-this.body.width*0.5,-this.body.height*0.5);
+    ctx2.drawImage(this.eye,-this.eye.width*0.5,-this.eye.height*0.5);
     ctx2.drawImage(this.tail,-this.tail.width*0.5+32,-this.tail.height*0.5);
 
     ctx2.restore();

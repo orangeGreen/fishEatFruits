@@ -13,6 +13,8 @@ document.body.onload = function(){
     init();
 }
 
+var lastTime = 0;  //上一次的时间
+var deltaTime = 0;  //每帧的间隔时间
 var backImage;
 var ane;
 var fruit;
@@ -31,7 +33,7 @@ function init(){
     backImage.src = "image/background.jpg";
 
     backImage.onload = function(){
-    
+        
         //海葵初始化
         ane = new Ane();
         ane.init();
@@ -47,6 +49,8 @@ function init(){
         //鼠标事件初始化
         mouse = new Mouse();
         mouse.init();
+
+        
         //启动游戏
         gameLoop();
     }
@@ -61,7 +65,12 @@ function gameLoop(){
     fruit.born();
     mom.draw();
     child.draw();
-    requestAnimFrame(gameLoop)
+    
+    requestAnimFrame(gameLoop);
+    //计算每一帧的间隔时间
+    deltaTime = (new Date()).getTime() - lastTime;
+    lastTime = (new Date()).getTime();
+    
 }
 
 //画背景图像

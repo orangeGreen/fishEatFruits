@@ -61,6 +61,7 @@ Ane.prototype.drawAne = function(i){
     ctx1.moveTo(this.x[i],can1.height);
     this.topX[i] = this.x[i]-this.offsetX;
     this.topY[i] = can1.height-this.len[i] ;
+    //我们用贝塞尔二次曲线来画弯曲的海葵，并在一定时间改变弯曲程度，达到飘动的画面。
     ctx1.quadraticCurveTo(this.x[i],can1.height-this.len[i]+this.offsetCtlY,this.topX[i],this.topY[i])
     ctx1.stroke();
     ctx1.closePath();

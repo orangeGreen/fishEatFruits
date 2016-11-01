@@ -4,8 +4,6 @@
 
 var Child = function(){
 
-    this.body = new Image();  //身体
-
     this.x = 0;
     this.y = 0;
     this.angle = 0; // 
@@ -20,15 +18,17 @@ var Child = function(){
     this.eyeImage = []; //所有眼睛图像
     this.eyeInterval = 200; //眨眼睛间隔
     this.eyeIsNictation = true; //是否正在眨眼睛
+
+    this.bodyTimer = 0; //身体计时器
+    this.bodyCount = 0; //身体计数器
+    this.bodyImage = []; //所有身体图片
+    this.bodyInterval = 200; //身体变化每一帧间隔
 }
 
 //孩子初始化
 
 Child.prototype.init = function(){
     
-    this.body.src = "image/babyFade0.png"
-    
-
     //坐标跟随妈妈
     this.x = can2.width*0.5;
     this.y = can2.height*0.5;
@@ -45,6 +45,12 @@ Child.prototype.init = function(){
         var img = new Image();
         img.src = "image/babyEye"+i+".png";
         this.eyeImage.push(img);
+    }
+    //把所有身体图像加载进去
+    for(var i = 0; i < 20; i++){
+        var img = new Image();
+        img.src = "image/babyFade"+i+".png";
+        this.bodyImage.push(img);
     }
 }
 
@@ -84,6 +90,18 @@ Child.prototype.draw = function(){
         this.eyeIsNictation = true;
         this.eyeTimer  = 0;
     }
+
+    //身体计时器
+    this.bodyTimer += deltaTime;
+    if (this.bodyTimer > this.bodyInterval){
+        this.bodyCount ++;
+        if (this.bodyCount > this.bodyImage.length-1){
+            //Game Over
+            console.log("children die !")
+            this.bodyCount = 0;
+        }
+        this.bodyTimer = 0;
+    }
     //小鱼需要转动的角度
     var dx = mom.x-this.x;
     var dy = mom.y-this.y;
@@ -91,7 +109,7 @@ Child.prototype.draw = function(){
     this.angle = lerpAngle(beta,this.angle,0.9)
     ctx2.translate(this.x,this.y);  //把画画原点移动到大鱼要画的位置
     ctx2.rotate(this.angle);
-    ctx2.drawImage(this.body,-this.body.width*0.5,-this.body.height*0.5);
+    ctx2.drawImage(this.bodyImage[this.bodyCount],-this.bodyImage[this.bodyCount].width*0.5,-this.bodyImage[this.bodyCount].height*0.5);
     ctx2.drawImage(this.eyeImage[this.eyeCount],-this.eyeImage[this.eyeCount].width*0.5,-this.eyeImage[this.eyeCount].height*0.5);
     ctx2.drawImage(this.tailImage[this.tailCount],-this.tailImage[this.tailCount].width*0.5+25,-this.tailImage[this.tailCount].height*0.5);
     ctx2.restore();

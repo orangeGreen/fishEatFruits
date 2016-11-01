@@ -19,7 +19,6 @@ window.requestAnimFrame = (function() {
     }
 }
 
-
 //一个数值趋近于目标数值
 
 function lerpAim(aim,s,per){  //目标值，原值，趋近百分比，0-1

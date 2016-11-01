@@ -20,8 +20,7 @@ var Mom = function(){
     this.eyeTimer = 0; //眼睛计时器
     this.eyeCount = 0; //眼睛计数器
     this.eyeImage = []; //所有眼睛图像
-    this.eyeInterval = 200; //眨眼睛间隔
-    this.eyeIsNictation = true; //是否正在眨眼睛
+    this.eyeInterval = 2000; //眨眼睛间隔
 }
 
 //初始化妈妈
@@ -55,24 +54,21 @@ Mom.prototype.draw = function(){
     this.tailTimer += deltaTime; //加上每一帧的间隔时间
     
     if (this.tailTimer > this.tailInterval){
-
-        this.tailCount  = (this.tailCount+1)%(this.tailImage.length-1);//如过计数器大于尾巴图片数，归零
+        this.tailCount  = (this.tailCount+1)%(this.tailImage.length);//如过计数器大于尾巴图片数，归零
         this.tailTimer %= this.tailInterval; //然后把计时器归位
     }
     //眼睛计时器
     this.eyeTimer += deltaTime;
  
-    
-    if (this.eyeIsNictation && this.eyeTimer > this.eyeInterval){
-        if (this.eyeCount == 1){  //如果是闭上的，那么就把眨眼睛关上
-            this.eyeIsNictation = false;
+    if ( this.eyeTimer > this.eyeInterval){
+        this.eyeCount = (this.eyeCount + 1) % (this.eyeImage.length);
+        //如果眼睛睁开的,那么就要闭着
+        if (this.eyeCount == 0){
+            this.eyeInterval  =  Math.random()*1000+2000;
+        }else{
+            this.eyeInterval  =  Math.random()*200+200;
         }
-        this.eyeCount = (this.eyeCount+1)%(this.eyeImage.length);
-    
-        this.eyeTimer %= this.eyeInterval;
-    }else if(!this.eyeIsNictation && (this.eyeTimer > Math.random()*1000+2000)){
-        this.eyeIsNictation = true;
-        this.eyeTimer  = 0;
+        this.eyeTimer = 0;  //归零
     }
 
     ctx2.clearRect(0,0,can2.width,can2.height);

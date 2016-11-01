@@ -76,9 +76,9 @@ Child.prototype.draw = function(){
         this.eyeCount = (this.eyeCount + 1) % (this.eyeImage.length);
         //如果眼睛睁开的,那么就要闭着
         if (this.eyeCount == 0){
-            this.eyeInterval  =  Math.random()*1000+2000;
+            this.eyeInterval  =  Math.random()*1000+2000;  //要闭着时间隔长一点
         }else{
-            this.eyeInterval  =  Math.random()*200+200;
+            this.eyeInterval  =  Math.random()*200+200;  //时间短一点
         }
        
         this.eyeTimer = 0;  //归零

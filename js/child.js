@@ -58,43 +58,50 @@ Child.prototype.init = function(){
 
 Child.prototype.draw = function(){
     ctx2.save();
-    //坐标跟随妈妈
-    this.x = lerpAim(mom.x,this.x,0.98);  
-    this.y = lerpAim(mom.y,this.y,0.98);
-    //尾巴计时器
-    this.tailTimer += deltaTime; //加上每一帧的间隔时间
+
+    if (!gameOver){
+       //坐标跟随妈妈
+        this.x = lerpAim(mom.x,this.x,0.98);  
+        this.y = lerpAim(mom.y,this.y,0.98);
+        //尾巴计时器
+        this.tailTimer += deltaTime; //加上每一帧的间隔时间
+        
+        if (this.tailTimer > this.tailInterval){
+            this.tailCount = (this.tailCount+1)%(this.tailImage.length);
+            this.tailTimer = this.tailTimer % this.tailInterval; //然后把计时器归位
+        }
+
+        //眼睛计时器
+        this.eyeTimer += deltaTime;
     
-    if (this.tailTimer > this.tailInterval){
-        this.tailCount = (this.tailCount+1)%(this.tailImage.length);
-        this.tailTimer = this.tailTimer % this.tailInterval; //然后把计时器归位
-    }
-
-    //眼睛计时器
-    this.eyeTimer += deltaTime;
- 
-    if ( this.eyeTimer > this.eyeInterval){
-        this.eyeCount = (this.eyeCount + 1) % (this.eyeImage.length);
-        //如果眼睛睁开的,那么就要闭着
-        if (this.eyeCount == 0){
-            this.eyeInterval  =  Math.random()*1000+2000;  //要闭着时间隔长一点
-        }else{
-            this.eyeInterval  =  Math.random()*200+200;  //时间短一点
+        if ( this.eyeTimer > this.eyeInterval){
+            this.eyeCount = (this.eyeCount + 1) % (this.eyeImage.length);
+            //如果眼睛睁开的,那么就要闭着
+            if (this.eyeCount == 0){
+                this.eyeInterval  =  Math.random()*1000+2000;  //要闭着时间隔长一点
+            }else{
+                this.eyeInterval  =  Math.random()*200+200;  //时间短一点
+            }
+        
+            this.eyeTimer = 0;  //归零
         }
-       
-        this.eyeTimer = 0;  //归零
-    }
 
-    //身体计时器
-    this.bodyTimer += deltaTime;
-    if (this.bodyTimer > this.bodyInterval){
-        this.bodyCount ++;
-        if (this.bodyCount > this.bodyImage.length-1){
-            //Game Over
-            console.log("children die !")
-            this.bodyCount = 0;
+        //身体计时器
+        this.bodyTimer += deltaTime;
+        if (this.bodyTimer > this.bodyInterval){
+            this.bodyCount ++;
+            if (this.bodyCount > this.bodyImage.length-1){
+
+                //Game Over
+                console.log("children die !")
+                gameOver = true;
+                this.bodyCount = this.bodyImage.length-1;
+            }
+            this.bodyTimer = 0;
         }
-        this.bodyTimer = 0;
     }
+    
+    
     //小鱼需要转动的角度
     var dx = mom.x-this.x;
     var dy = mom.y-this.y;

@@ -19,6 +19,7 @@ Mouse.prototype.init = function(){
 
 //让鱼妈妈移动
 Mouse.prototype.move = function(){
+    
     mom.move(this.x,this.y);
 }
 

@@ -22,13 +22,16 @@ var mom;
 var child;
 var mouse;
 var data;
+var gameOver = false; //是否结束游戏
 function init(){
     can1.width = 800;
     can1.height = 600;
 
     can2.width = 800;
     can2.height = 600;
-
+    ctx2.fillStyle = "white";
+    ctx2.font = " 30px arial";
+    ctx2.textAlign = "center"
     //背景图像加载
     backImage = new Image();
     backImage.src = "image/background.jpg";
@@ -36,7 +39,6 @@ function init(){
     backImage.onload = function(){
         //数据初始化
         data = new Data();
-        data.reset();
         
         //海葵初始化
         ane = new Ane();
@@ -64,6 +66,7 @@ function init(){
 function gameLoop(){
     //同意清空一下
     ctx2.clearRect(0,0,can2.width,can2.height);
+    
 
     data.draw();
     drawBackground();
@@ -73,11 +76,12 @@ function gameLoop(){
     mom.draw();
     child.draw();
     
-    requestAnimFrame(gameLoop);
+    
     //计算每一帧的间隔时间
     deltaTime = (new Date()).getTime() - lastTime;
     lastTime = (new Date()).getTime();
-    
+
+    requestAnimFrame(gameLoop);
 }
 
 //画背景图像

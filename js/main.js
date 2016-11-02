@@ -23,6 +23,7 @@ var child;
 var mouse;
 var data;
 var arc;
+var dust;
 var gameOver = false; //是否结束游戏
 function init(){
     can1.width = 800;
@@ -40,6 +41,9 @@ function init(){
     backImage.onload = function(){
         //数据初始化
         data = new Data();
+        //
+        dust = new Dust();
+        dust.init();
         //圆圈
         arc = new Arc();
         arc.init();
@@ -67,14 +71,15 @@ function init(){
 
 //游戏循环
 function gameLoop(){
-    //同意清空一下
+    //清空一下
+    ctx1.clearRect(0,0,can1.width,can1.height);
     ctx2.clearRect(0,0,can2.width,can2.height);
     
-    
-    data.draw();
     drawBackground();
-    ane.draw();
+    dust.draw();
 
+    data.draw();
+    ane.draw();
     fruit.born();
     mom.draw();
     child.draw();

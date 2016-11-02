@@ -1,13 +1,11 @@
 
 //主文件
 
-
 var can1 = document.getElementById('canvas1')
 var can2 = document.getElementById('canvas2')
 
 ctx1 = can1.getContext('2d');
 ctx2 = can2.getContext('2d');
-
 
 document.body.onload = function(){
     init();
@@ -26,11 +24,27 @@ var arc;
 var dust;
 var gameOver = false; //是否结束游戏
 function init(){
-    can1.width = 800;
-    can1.height = 600;
+    var x = document.body.clientWidth;
+    var y = document.body.clientHeight;
+    //document.write(x," - ",y)
+    var container = document.getElementById("container");
+   
+    if (x < 800 || y < 600){
+        container.style.width = x+"px";
+        container.style.height = y+"px";
+        can1.width = x;
+        can1.height = y;
 
-    can2.width = 800;
-    can2.height = 600;
+        can2.width = x;
+        can2.height = y;
+    }else{
+        can1.width = 800;
+        can1.height = 600;
+
+        can2.width = 800;
+        can2.height = 600;
+    }
+    
     ctx2.fillStyle = "white";
     ctx2.font = " 30px arial";
     ctx2.textAlign = "center"

@@ -35,7 +35,7 @@ Arc.prototype.draw = function(){
             ctx2.beginPath();
             ctx2.lineWidth = this.lineWidth;
             ctx2.globalAlpha = obj.alpha;
-            console.log(obj.alpha)
+         
             ctx2.strokeStyle = obj.color;
             ctx2.arc(obj.x,obj.y,obj.r,0,2*Math.PI);
             ctx2.stroke();
@@ -59,9 +59,9 @@ Arc.prototype.set = function(obj){
     //设置圆圈时，把池子里可用的拿来修改
      for(var i =0; i<this.arcPool.length; i++){
           if (this.arcPool[i].state){
-              console.log(obj)
+             
                this.arcPool[i] = obj;
-               console.log(this.arcPool[i])
+              
                break;
           }
      }

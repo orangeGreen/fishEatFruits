@@ -2,29 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no,minimal-ui"/>
     <title>大鱼喂小鱼</title>
 </head>
 <body>
-    <div class="main_container">
+<div class="main">
+    <div id="container">
         <canvas id="canvas1"></canvas>
         <canvas id="canvas2"></canvas>
     </div>
+</div>
+    
 </body>
 <style>
-.main_container{
+html{
+    height:100%;
+}
+body{
+    height:100%;
+}
+*{
+    margin:0;
+    padding:0;
+}
+.main{
+    width:100%;
+    height:100%;
+    text-align:center;
+}
+#container{
     width:800px;
     height:600px;
-    margin:100px auto;
+    margin:0 auto;
     position:relative;
+    overflow:hidden;
 }
 #canvas1{
     position:absolute;
     top:0;
+    left:0;
     z-index:0;
 }
 #canvas2{
     position:absolute;
     top:0;
+    left:0;
     z-index:1;
 }
 </style>

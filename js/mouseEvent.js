@@ -9,17 +9,30 @@ var Mouse = function(){
 //鼠标初始化
 Mouse.prototype.init = function(){
     var main = this;
+    //鼠标
     can2.addEventListener("mousemove",function(e){
     
        main.x = pointConvert(e).x;
        main.y = pointConvert(e).y;
-       main.move();
+       main.pcmove();
+    },false) 
+
+
+    //触摸
+    can2.addEventListener("touchmove",function(e){
+    
+       main.x = e.touches[0].clientX;
+       main.y = e.touches[0].clientY;
+      
+       main.mobilemove();
     },false) 
 }
 
 //让鱼妈妈移动
-Mouse.prototype.move = function(){
+Mouse.prototype.pcmove = function(){
     
     mom.move(this.x,this.y);
 }
-
+Mouse.prototype.mobilemove = function(){
+     mom.move(this.x,this.y);
+}

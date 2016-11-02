@@ -22,6 +22,7 @@ var mom;
 var child;
 var mouse;
 var data;
+var arc;
 var gameOver = false; //是否结束游戏
 function init(){
     can1.width = 800;
@@ -39,7 +40,9 @@ function init(){
     backImage.onload = function(){
         //数据初始化
         data = new Data();
-        
+        //圆圈
+        arc = new Arc();
+        arc.init();
         //海葵初始化
         ane = new Ane();
         ane.init();
@@ -67,7 +70,7 @@ function gameLoop(){
     //同意清空一下
     ctx2.clearRect(0,0,can2.width,can2.height);
     
-
+    
     data.draw();
     drawBackground();
     ane.draw();
@@ -75,7 +78,7 @@ function gameLoop(){
     fruit.born();
     mom.draw();
     child.draw();
-    
+    arc.draw();
     
     //计算每一帧的间隔时间
     deltaTime = (new Date()).getTime() - lastTime;

@@ -130,6 +130,17 @@ Mom.prototype.eatFruits = function(){
             if (this.bodyCount > this.blueBodyImage.length-1){
                 this.bodyCount = this.blueBodyImage.length-1;
             }
+
+            //设置圆圈
+            var obj = {
+                state:false, //可用状态
+                x:this.x,  //圆圈圆心
+                y:this.y,  
+                r:0, //圆圈半径
+                alpha:1, //透明度
+                color:"white" //颜色
+            }
+            arc.set(obj)
         }
     }
 }
@@ -144,5 +155,15 @@ Mom.prototype.feedBaby = function(){
 
         data.addScore(); //加分数，重置大鱼果实数量
         this.bodyCount = 0;  //大鱼身体重置
+        //设置动画圆圈
+            var obj = {
+                state:false, //可用状态
+                x:this.x,  //圆圈圆心
+                y:this.y,  
+                r:0, //圆圈半径
+                alpha:1, //透明度
+                color:"#FF4040" //颜色
+            }
+            arc.set(obj)
     }
 }

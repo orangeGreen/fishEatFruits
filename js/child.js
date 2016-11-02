@@ -22,7 +22,7 @@ var Child = function(){
     this.bodyTimer = 0; //身体计时器
     this.bodyCount = 0; //身体计数器
     this.bodyImage = []; //所有身体图片
-    this.bodyInterval = 200; //身体变化每一帧间隔
+    this.bodyInterval = 500; //身体变化每一帧间隔
 }
 
 //孩子初始化
